@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gulf · Gana un viaje al Gran Premio de México 2026</title>
+<meta name="description" content="Compra Gulf, registra tu factura y participa por uno de 2 viajes al Gran Premio de México 2026." />
+<!-- Tipografía de marca Gulf: Helvetica Neue (primaria, nativa en Apple) con Arial como
+     fallback aprobado por el manual para web/HTML. No requiere archivos ni licencia web.
+     Para Helvetica Neue idéntica en Windows/Android haría falta licencia webfont (Linotype). -->
+<style>
+  :root{
+    /* Paleta oficial Gulf (del toolkit 2026) */
+    --gulf-dark-blue:#002776;   /* PANTONE 280C */
+    --gulf-orange:#FF6319;      /* PANTONE 165C */
+    --gulf-racing-blue:#B9D9EB; /* PANTONE 290C */
+    --gulf-dark-grey:#6C6F70;
+    --gulf-med-grey:#A5ACAF;
+    --gulf-light-grey:#D1D4D3;
+    --white:#FFFFFF;
+    --ink:#0a1530;
+    --radius:14px;
+    --shadow:0 20px 50px rgba(0,15,55,.18);
+    /* Tipografía de marca Gulf */
+    --font-body:"Helvetica Neue",Arial,Helvetica,system-ui,sans-serif;
+    --font-head:"Helvetica Neue",Arial,Helvetica,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-body);
+    color:var(--ink);
+    background:var(--white);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:var(--font-head);font-weight:800;text-transform:uppercase;letter-spacing:.005em;line-height:1}
+  .wrap{width:min(1120px,92vw);margin-inline:auto}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+    font-family:var(--font-head);font-weight:800;text-transform:uppercase;
+    letter-spacing:.04em;font-size:1.15rem;
+    background:var(--gulf-orange);color:#fff;border:none;cursor:pointer;
+    padding:.95rem 2rem;border-radius:999px;text-decoration:none;
+    transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    box-shadow:0 10px 24px rgba(255,99,25,.35);
+  }
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+  .btn-ghost{background:transparent;border:2px solid rgba(255,255,255,.6);color:#fff;box-shadow:none}
+
+  /* ---------- TOP BAR / LOCKUP ---------- */
+  header.topbar{
+    position:sticky;top:0;z-index:40;background:#fff;
+    border-bottom:3px solid var(--gulf-orange);
+    box-shadow:0 2px 14px rgba(0,15,55,.07);
+  }
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:.55rem 0}
+  .lockup{display:flex;align-items:center}
+  .lockup-color{display:block;height:54px;width:auto;max-width:60vw}
+  .topbar .btn{font-size:.95rem;padding:.6rem 1.4rem}
+  @media(max-width:640px){.topbar .btn{display:none}}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;overflow:hidden;color:#fff;
+    background:
+      radial-gradient(120% 90% at 80% -10%, rgba(255,99,25,.55) 0%, rgba(255,99,25,0) 55%),
+      linear-gradient(160deg,#003a9e 0%, var(--gulf-dark-blue) 55%, #001a52 100%);
+  }
+  .hero::after{ /* speed streaks */
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background:repeating-linear-gradient(115deg,transparent 0 38px, rgba(185,217,235,.05) 38px 40px);
+  }
+  .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:1.5rem;
+    align-items:center;padding:3rem 0 1rem}
+  .hero-visual{position:relative}
+  .hero-visual img{display:block;width:175%;max-width:none;margin:0 -45% 0 -10%;
+    filter:drop-shadow(0 28px 40px rgba(0,0,0,.5))}
+  .eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:rgba(185,217,235,.16);
+    border:1px solid rgba(185,217,235,.4);color:var(--gulf-racing-blue);
+    font-weight:700;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;
+    padding:.4rem .9rem;border-radius:999px}
+  .hero h1{font-size:clamp(2.3rem,4.6vw,3.7rem);font-weight:800;margin:1rem 0 .7rem}
+  .hero h1 .accent{color:var(--gulf-orange)}
+  .hero p.lead{font-size:1.15rem;color:#e8f1fb;max-width:38ch;margin-bottom:1.6rem}
+  .hero .cta-row{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+  .tagline{margin-top:1.8rem;font-family:var(--font-head);font-weight:700;
+    text-transform:uppercase;letter-spacing:.03em;color:var(--gulf-racing-blue);font-size:1.05rem}
+  .tagline .hash{color:var(--gulf-orange)}
+
+  /* prize bar */
+  .prize-bar{position:relative;z-index:2;border-top:1px solid rgba(185,217,235,.22);background:rgba(0,0,0,.2)}
+  .prize-bar .wrap{display:flex;align-items:center;gap:2.2rem;padding:1.1rem 0;flex-wrap:wrap}
+  .prize-bar-head{display:flex;align-items:center;gap:.55rem;flex:none}
+  .prize-bar-head .big{font-family:var(--font-head);font-weight:800;font-size:3.4rem;color:var(--gulf-orange);line-height:.75}
+  .prize-bar-head .lbl{font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:.92rem;line-height:1;color:var(--gulf-racing-blue)}
+  .prize-bar ul{list-style:none;display:grid;grid-template-columns:repeat(2,auto);gap:.45rem 2.2rem;
+    color:#eaf2fb;font-size:.95rem;font-weight:500}
+  .prize-bar li{position:relative;padding-left:1.4rem}
+  .prize-bar li::before{content:"✓";position:absolute;left:0;color:var(--gulf-orange);font-weight:800}
+  @media(max-width:860px){
+    .hero .wrap{grid-template-columns:1fr;padding:2.4rem 0 0}
+    .hero-visual img{width:100%;margin:1.2rem 0 .4rem}
+    .prize-bar .wrap{flex-direction:column;align-items:flex-start;gap:.9rem;padding:1.5rem 0}
+    .prize-bar-head{gap:.7rem}
+    .prize-bar-head .big{font-size:2.8rem}
+    .prize-bar ul{grid-template-columns:1fr;gap:.55rem}
+  }
+
+  /* ---------- STEPS ---------- */
+  .steps{background:var(--gulf-racing-blue);padding:3rem 0}
+  .steps h2{text-align:center;color:var(--gulf-dark-blue);font-size:2rem;font-weight:800;margin-bottom:.4rem}
+  .steps .sub{text-align:center;color:#33506f;margin-bottom:2.2rem;font-weight:500}
+  .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+  .step{background:#fff;border-radius:var(--radius);padding:1.5rem;box-shadow:0 8px 22px rgba(0,15,55,.08);position:relative}
+  .step .num{position:absolute;top:-16px;left:1.3rem;width:38px;height:38px;border-radius:50%;
+    background:var(--gulf-orange);color:#fff;font-family:var(--font-head);font-weight:800;
+    display:flex;align-items:center;justify-content:center;font-size:1.25rem;box-shadow:var(--shadow)}
+  .step h3{font-size:1.15rem;color:var(--gulf-dark-blue);margin:.8rem 0 .35rem}
+  .step p{font-size:.9rem;color:#54606e}
+  @media(max-width:860px){.steps-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.steps-grid{grid-template-columns:1fr}}
+
+  /* ---------- FORM ---------- */
+  .register{padding:4rem 0;background:
+      linear-gradient(180deg,#fff 0%, #f3f7fc 100%)}
+  .register .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:3rem;align-items:start}
+  .register .pitch h2{font-size:2.4rem;color:var(--gulf-dark-blue);font-weight:800;line-height:1}
+  .register .pitch p{margin-top:1rem;color:#465468}
+  .register .pitch .note{margin-top:1.4rem;background:#fff;border-left:4px solid var(--gulf-orange);
+    padding:1rem 1.1rem;border-radius:8px;font-size:.88rem;color:#54606e;box-shadow:0 6px 16px rgba(0,15,55,.06)}
+  .form-card{background:#fff;border-radius:18px;padding:2rem;box-shadow:var(--shadow);border-top:5px solid var(--gulf-orange)}
+  .form-card h3{color:var(--gulf-dark-blue);font-size:1.5rem;margin-bottom:1.2rem}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .field{margin-bottom:1rem;display:flex;flex-direction:column}
+  .field.full{grid-column:1/-1}
+  label{font-weight:600;font-size:.85rem;color:var(--gulf-dark-blue);margin-bottom:.35rem}
+  label .req{color:var(--gulf-orange)}
+  label .opt{color:var(--gulf-med-grey);font-weight:500;font-size:.78rem}
+  input,select{font-family:inherit;font-size:.98rem;padding:.8rem .9rem;border:1.5px solid #d7dee8;
+    border-radius:10px;background:#fff;color:var(--ink);transition:border-color .15s, box-shadow .15s;width:100%}
+  input:focus,select:focus{outline:none;border-color:var(--gulf-orange);box-shadow:0 0 0 3px rgba(255,99,25,.15)}
+  .hint{font-size:.76rem;color:var(--gulf-med-grey);margin-top:.3rem}
+  .phone-row{display:flex;gap:.5rem}
+  .phone-row select{flex:none;width:auto}
+  .checks{margin-top:.5rem;display:grid;gap:.7rem}
+  .check{display:flex;gap:.6rem;align-items:flex-start;font-size:.84rem;color:#465468}
+  .check input{width:18px;height:18px;flex:none;margin-top:2px;accent-color:var(--gulf-orange)}
+  .check a{color:var(--gulf-dark-blue);font-weight:600}
+  .form-card .btn{width:100%;margin-top:1.2rem;font-size:1.25rem}
+  .secure{display:flex;align-items:center;justify-content:center;gap:.4rem;margin-top:.9rem;font-size:.78rem;color:var(--gulf-med-grey)}
+  @media(max-width:860px){.register .wrap{grid-template-columns:1fr;gap:2rem}.grid2{grid-template-columns:1fr}}
+
+  /* success */
+  .success{display:none;text-align:center;padding:1rem .5rem}
+  .success.show{display:block;animation:pop .4s ease}
+  @keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+  .success .check-circle{width:84px;height:84px;margin:0 auto 1rem;border-radius:50%;
+    background:var(--gulf-orange);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px rgba(255,99,25,.4)}
+  .success h3{font-size:1.9rem;color:var(--gulf-dark-blue)}
+  .success p{color:#465468;margin-top:.6rem}
+  .success .code{margin-top:1.2rem;display:inline-block;background:#f3f7fc;border:1px dashed var(--gulf-med-grey);
+    padding:.6rem 1.2rem;border-radius:10px;font-family:var(--font-head);font-weight:800;font-size:1.4rem;color:var(--gulf-dark-blue);letter-spacing:.05em}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--gulf-dark-blue);color:#cdd9ea;padding:2.6rem 0;font-size:.82rem}
+  footer .wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:2rem;align-items:start}
+  footer .lockup-white{display:block;width:240px;max-width:80%;margin-bottom:1rem}
+  footer h4{color:#fff;font-family:var(--font-head);font-size:1rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem}
+  footer a{color:var(--gulf-racing-blue);text-decoration:none}
+  footer .legal{margin-top:1.4rem;border-top:1px solid rgba(255,255,255,.15);padding-top:1.2rem;
+    grid-column:1/-1;color:#90a4c4;font-size:.74rem;line-height:1.6}
+  @media(max-width:640px){footer .wrap{grid-template-columns:1fr}}
+
+  /* ---------- MODAL (T&C) ---------- */
+  .modal{position:fixed;inset:0;background:rgba(0,15,55,.6);display:none;align-items:center;justify-content:center;z-index:100;padding:1rem}
+  .modal.show{display:flex}
+  .modal-box{background:#fff;border-radius:16px;max-width:640px;width:100%;max-height:85vh;overflow:auto;padding:2rem;box-shadow:var(--shadow)}
+  .modal-box h3{color:var(--gulf-dark-blue);font-size:1.5rem;margin-bottom:1rem}
+  .modal-box h4{color:var(--gulf-dark-blue);margin:1rem 0 .3rem;font-size:.95rem}
+  .modal-box p,.modal-box li{font-size:.86rem;color:#465468;margin-bottom:.5rem}
+  .modal-box ol{padding-left:1.2rem}
+  .modal-box .close{float:right;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--gulf-med-grey);line-height:1}
+  .placeholder-tag{position:absolute;top:6px;right:8px;background:rgba(255,99,25,.9);color:#fff;font-size:.6rem;
+    padding:2px 6px;border-radius:4px;letter-spacing:.05em;font-weight:700}
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="lockup" href="#" aria-label="Gulf · Official Partner of Atlassian Williams F1 Team">
+      <img class="lockup-color" src="assets/lockup-color.svg" alt="Gulf · Official Partner of Atlassian Williams F1 Team">
+    </a>
+    <a href="#registro" class="btn">Participar ahora</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <h1>Gana un viaje al <span class="accent">Gran Premio de México</span> 2026</h1>
+      <p class="lead">Compra tus productos Gulf, registra el número de tu factura y participa por uno de <strong>2 viajes dobles</strong> para vivir la Fórmula 1 en vivo este noviembre.</p>
+      <div class="cta-row">
+        <a href="#registro" class="btn">Registrar mi factura</a>
+        <a href="#como" class="btn btn-ghost">¿Cómo participo?</a>
+      </div>
+      <div class="tagline">Bolder &amp; Brighter Together · <span class="hash">#TogetherWeAreUnstoppable</span></div>
+    </div>
+
+    <div class="hero-visual">
+      <picture>
+        <source srcset="assets/cars-twin.webp" type="image/webp">
+        <img src="assets/cars-twin.png" alt="Monoplazas Atlassian Williams F1 Team 2026 — Albon &amp; Sainz">
+      </picture>
+    </div>
+  </div>
+
+  <div class="prize-bar">
+    <div class="wrap">
+      <div class="prize-bar-head"><span class="big">2</span><span class="lbl">ganadores<br>individuales</span></div>
+      <ul>
+        <li>Vuelo redondo + hospedaje a CDMX</li>
+        <li>Entradas al Gran Premio de México 2026</li>
+        <li>Experiencia Gulf x Williams</li>
+        <li>Sorteo ante notario · nov. 2026</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEPS ============ -->
+<section class="steps" id="como">
+  <div class="wrap">
+    <h2>Participar es muy fácil</h2>
+    <p class="sub">Cuatro pasos para entrar al sorteo</p>
+    <div class="steps-grid">
+      <div class="step"><div class="num">1</div><h3>Compra Gulf</h3><p>Adquiere cualquier producto Gulf participante en puntos de venta autorizados.</p></div>
+      <div class="step"><div class="num">2</div><h3>Escanea el QR</h3><p>Escanea el código QR del material promocional para abrir esta página.</p></div>
+      <div class="step"><div class="num">3</div><h3>Registra tus datos</h3><p>Completa el formulario con tus datos y el número de tu factura de compra.</p></div>
+      <div class="step"><div class="num">4</div><h3>¡Listo!</h3><p>Quedas dentro del sorteo. Si ganas, te contactamos por teléfono y correo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REGISTER ============ -->
+<section class="register" id="registro">
+  <div class="wrap">
+    <div class="pitch">
+      <h2>Registra tu factura y participa</h2>
+      <p>Llena el formulario una sola vez por factura. Cada factura de un producto participante equivale a una oportunidad de ganar.</p>
+      <div class="note">🔒 Tus datos se usan únicamente para administrar este sorteo y contactar a los ganadores. No los compartimos con terceros con fines publicitarios sin tu consentimiento.</div>
+    </div>
+
+    <div class="form-card">
+      <!-- FORM -->
+      <form id="gulfForm" novalidate>
+        <h3>Formulario de participación</h3>
+        <div class="grid2">
+          <div class="field">
+            <label for="nombre">Nombre(s) <span class="req">*</span></label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ej. María José" required>
+          </div>
+          <div class="field">
+            <label for="apellido">Apellidos <span class="req">*</span></label>
+            <input type="text" id="apellido" name="apellido" placeholder="Ej. García López" required>
+          </div>
+
+          <div class="field full">
+            <label for="dpi">DPI <span class="req">*</span></label>
+            <input type="text" id="dpi" name="dpi" inputmode="numeric" maxlength="13" placeholder="13 dígitos" required>
+            <span class="hint">Documento Personal de Identificación (13 dígitos, sin guiones).</span>
+          </div>
+
+          <div class="field full">
+            <label for="telefono">Número de teléfono <span class="req">*</span></label>
+            <div class="phone-row">
+              <select id="lada" name="lada" aria-label="Código de país">
+                <option value="+502" selected>🇬🇹 +502</option>
+                <option value="+503">🇸🇻 +503</option>
+                <option value="+504">🇭🇳 +504</option>
+                <option value="+52">🇲🇽 +52</option>
+              </select>
+              <input type="tel" id="telefono" name="telefono" inputmode="numeric" placeholder="5555 5555" required>
+            </div>
+          </div>
+
+          <div class="field full">
+            <label for="email">Correo electrónico <span class="req">*</span></label>
+            <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+          </div>
+
+          <div class="field">
+            <label for="factura">No. de factura <span class="req">*</span></label>
+            <input type="text" id="factura" name="factura" placeholder="Ej. A-001234" required>
+          </div>
+          <div class="field">
+            <label for="puntoventa">Punto de venta <span class="opt">(opcional)</span></label>
+            <input type="text" id="puntoventa" name="puntoventa" placeholder="Dónde compraste">
+          </div>
+
+          <div class="field full">
+            <label for="fechaCompra">Fecha de compra <span class="opt">(opcional)</span></label>
+            <input type="date" id="fechaCompra" name="fechaCompra">
+          </div>
+        </div>
+
+        <div class="checks">
+          <label class="check">
+            <input type="checkbox" id="edad" name="edad" required>
+            <span>Declaro ser mayor de 18 años y residir en Guatemala. <span class="req">*</span></span>
+          </label>
+          <label class="check">
+            <input type="checkbox" id="terminos" name="terminos" required>
+            <span>He leído y acepto los <a href="#" id="openTerms">Términos y Condiciones</a> y el <a href="#" id="openTerms2">Aviso de Privacidad</a>. <span class="req">*</span></span>
+          </label>
+          <label class="check">
+            <input type="checkbox" id="marketing" name="marketing">
+            <span>Quiero recibir promociones y noticias de Gulf. <span class="opt">(opcional)</span></span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn">Entrar al sorteo 🏎️</button>
+        <div class="secure">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 10V8a6 6 0 1112 0v2m-9 0h6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2v-6a2 2 0 012-2z" stroke="#A5ACAF" stroke-width="2"/></svg>
+          Conexión segura · Tus datos están protegidos
+        </div>
+      </form>
+
+      <!-- SUCCESS STATE -->
+      <div class="success" id="successBox">
+        <div class="check-circle">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>¡Quedaste registrado!</h3>
+        <p>Tu participación fue recibida con éxito. Guarda tu número de confirmación. Si resultas ganador, te contactaremos por teléfono y correo.</p>
+        <div class="code" id="confCode">GULF-MX-000000</div>
+        <p style="margin-top:1.2rem"><span class="tagline" style="color:var(--gulf-orange)">#TogetherWeAreUnstoppable</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div>
+      <img class="lockup-white" src="assets/lockup-white.svg" alt="Gulf · Official Partner of Atlassian Williams F1 Team">
+      <p>Bolder &amp; Brighter Together.</p>
+    </div>
+    <div>
+      <h4>Enlaces</h4>
+      <p><a href="#" id="openTerms3">Términos y Condiciones</a></p>
+      <p><a href="#">Aviso de Privacidad</a></p>
+      <p><a href="#">Contacto</a></p>
+    </div>
+    <div class="legal">
+      Promoción válida en Guatemala del [INSERTAR FECHA INICIO] al [INSERTAR FECHA FIN] de 2026. Aplican términos y condiciones. 2 ganadores seleccionados por sorteo ante notario. El premio no es transferible ni canjeable por efectivo. Marca registrada Gulf® usada bajo licencia. "Atlassian Williams F1 Team" y los logotipos asociados se usan bajo el programa de socios; todo material promocional debe ser aprobado conforme al proceso de aprobación del toolkit 2026 (5 días hábiles). Este sitio es una maqueta de demostración.
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MODAL T&C ============ -->
+<div class="modal" id="termsModal">
+  <div class="modal-box">
+    <button class="close" id="closeModal" aria-label="Cerrar">&times;</button>
+    <h3>Términos y Condiciones</h3>
+    <p><em>Texto de muestra — debe ser validado por el área legal y aprobado por Gulf / Atlassian Williams F1 Team antes de publicar.</em></p>
+    <h4>1. Vigencia</h4>
+    <p>La promoción es válida del [fecha inicio] al [fecha fin] de 2026 en la República de Guatemala.</p>
+    <h4>2. Participación</h4>
+    <p>Podrán participar personas mayores de 18 años residentes en Guatemala que compren un producto Gulf participante y registren el número de factura en esta página. Cada factura válida otorga una participación.</p>
+    <h4>3. Premios</h4>
+    <p>Se entregarán 2 premios individuales. El detalle del premio se describe en la página de la promoción.</p>
+    <h4>4. Sorteo y ganadores</h4>
+    <p>El sorteo se realizará ante notario el [fecha]. Los ganadores serán contactados por teléfono y correo electrónico dentro de los [X] días hábiles posteriores.</p>
+    <h4>5. Datos personales</h4>
+    <p>Los datos recabados se utilizarán para administrar la promoción y contactar a los ganadores, conforme al Aviso de Privacidad. El participante puede solicitar la eliminación de sus datos en cualquier momento.</p>
+    <h4>6. Restricciones</h4>
+    <p>El premio no es transferible ni canjeable por dinero en efectivo. Quedan excluidos empleados de Gulf, agencias participantes y sus familiares directos.</p>
+  </div>
+</div>
+
+<script>
+  // ---- Modal ----
+  const modal = document.getElementById('termsModal');
+  const openLinks = ['openTerms','openTerms2','openTerms3'];
+  openLinks.forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('click',e=>{e.preventDefault();modal.classList.add('show');});});
+  document.getElementById('closeModal').addEventListener('click',()=>modal.classList.remove('show'));
+  modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('show');});
+
+  // ---- Form (maqueta: validación + estado de éxito, sin envío real) ----
+  const form = document.getElementById('gulfForm');
+  const successBox = document.getElementById('successBox');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const dpi = document.getElementById('dpi').value.replace(/\D/g,'');
+    if(dpi.length !== 13){ alert('El DPI debe tener 13 dígitos.'); return; }
+    if(!form.checkValidity()){
+      alert('Por favor completa los campos obligatorios y acepta los términos.');
+      form.reportValidity();
+      return;
+    }
+    // Código de confirmación de muestra (en producción lo genera el backend)
+    const code = 'GULF-MX-' + String(Math.floor(100000 + (new Date().getTime() % 900000))).slice(0,6);
+    document.getElementById('confCode').textContent = code;
+    form.style.display = 'none';
+    successBox.classList.add('show');
+    successBox.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+</script>
+</body>
+</html>
